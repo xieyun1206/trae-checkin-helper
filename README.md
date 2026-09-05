@@ -16,7 +16,7 @@
 ## 环境要求
 
 - 本机已安装并**登录** TRAE 桌面端（TRAE SOLO CN / Trae）
-- Python 3.10+（仅标准库，无需 pip 安装）
+- **Python 3.10+ 仅源码方式需要**（仅标准库，无需 pip 安装）；技能包已附带 `bin/trae-checkin-helper.exe`，无 Python 的 Windows 机器也可直接运行
 - 账号需为 CN 地区、`account.scope = marscode`（签到活动前提）
 
 ## 快速安装
@@ -51,6 +51,22 @@ npx skills add <repo-url> --skill trae-checkin-helper --agent 'trae-cn'
 重启 TRAE 后即可在 `/` 命令列表看到该技能。
 
 ## 使用方法
+
+运行方式二选一（推荐 exe，无需安装 Python）：
+
+**方式 A · 免 Python 运行（推荐，Windows）**
+
+技能包已附带 `bin/trae-checkin-helper.exe`，本机无需安装 Python：
+
+```bat
+bin\trae-checkin-helper.exe checkin    :: 执行签到（推荐日常用法，token 过期自动刷新重试）
+bin\trae-checkin-helper.exe status     :: 只读查询签到状态（不做任何领取）
+bin\trae-checkin-helper.exe refresh    :: 仅刷新登录态（token 续期）
+bin\trae-checkin-helper.exe schedule   :: 定时守护：每天 10:00 自动签到（Ctrl+C 停止）
+bin\trae-checkin-helper.exe history    :: 查看最近执行记录
+```
+
+**方式 B · 源码运行（需 Python 3.10+）**
 
 ```bash
 python3 scripts/main.py checkin    # 执行签到（推荐日常用法，token 过期自动刷新重试）
