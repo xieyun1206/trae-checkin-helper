@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Build output (PyInstaller) — exe lives in bin/
+build/
+dist/
+*.spec
+
+# Runtime logs
+logs/results.jsonl
+logs/.last_scheduled_day
+
+# OS / editor
+.DS_Store
+Thumbs.db
