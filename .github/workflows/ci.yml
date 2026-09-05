@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Unit tests (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Run unit tests
+        run: python tests/run_tests.py
+
+  skill-validation:
+    name: Skill package sanity check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate SKILL.md and meta
+        run: |
+          test -f SKILL.md && echo "SKILL.md ok"
+          test -f _skillhub_meta.json && echo "_skillhub_meta.json ok"
+          python -c "import json; d=json.load(open('_skillhub_meta.json')); print('slug:', d['slug']); print('version:', d['version'])"
+          test -f scripts/main.py && echo "main.py ok"
+          python -c "import ast; ast.parse(open('scripts/main.py').read()); print('scripts parse ok')"
+
+      - name: Verify CLI help works
+        run: python scripts/main.py help | head -5
