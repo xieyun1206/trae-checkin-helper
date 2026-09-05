@@ -1,0 +1,13 @@
+{
+  "slug": "trae-checkin-helper",
+  "name": "TRAE自动签到领积分",
+  "name_en": "TRAE Checkin Helper",
+  "version": "1.0.0",
+  "author": "trae-checkin-helper",
+  "license": "MIT",
+  "description": "TRAE 平台自动签到领积分：自动解密本地登录态，每日签到领积分，token 过期自动刷新，支持定时执行与结果记录",
+  "description_en": "Automate daily check-in and credit claiming on the TRAE platform, with login-state decryption, auto token refresh and scheduled execution",
+  "source": "skillhub",
+  "userModified": false,
+  "installedAt": null
+}
